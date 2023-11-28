@@ -50,7 +50,7 @@ except mysql.connector.Error as err:
 async def authenticate(request: Request):
     try:
         api_key = request.headers.get('authorization').replace("Bearer ", "")
-        cursor.execute("SELECT * FROM voters WHERE voter_id = %s", (api_key,))
+        cursor.execute("SELECT * FROM voters_table WHERE voter_id = %s", (api_key,))
         if api_key not in [row[0] for row in cursor.fetchall()]:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
@@ -76,7 +76,7 @@ async def login(request: Request, voter_id: str, password: str):
 # Replace 'admin' with the actual role based on authentication
 async def get_role(voter_id, password):
     try:
-        cursor.execute("SELECT role FROM voters WHERE voter_id = %s AND password = %s", (voter_id, password,))
+        cursor.execute("SELECT role FROM voters_table WHERE voter_id = %s AND password = %s", (voter_id, password,))
         role = cursor.fetchone()
         if role:
             return role[0]
