@@ -44,12 +44,15 @@
 
 8. Open MySQL and create database named <b>voter_db</b>.
 
+           CREATE DATABASE voter_db;
+           USE voter_db;
+
 9. In the database created, create new table named <b>voters</b> in the given format and add some values.
 
-           CREATE TABLE voters (
-           voter_id VARCHAR(36) PRIMARY KEY NOT NULL,
-           role ENUM('admin', 'user') NOT NULL,
-           password VARCHAR(255) NOT NULL
+           CREATE TABLE voters_table (
+                voter_id VARCHAR(60) PRIMARY KEY NOT NULL,
+                role ENUM('admin', 'user') NOT NULL,
+                password VARCHAR(255) NOT NULL
            );
    <br>
 
